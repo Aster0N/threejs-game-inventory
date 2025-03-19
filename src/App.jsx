@@ -1,9 +1,7 @@
+import Scene from "./components/Scene"
+
 function App() {
-  return (
-    <>
-      <h1>Hello world</h1>
-    </>
-  )
+  return <Scene></Scene>
 }
 
 export default App
