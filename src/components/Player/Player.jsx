@@ -1,10 +1,9 @@
 import { useFrame } from "@react-three/fiber"
 import React, { useEffect, useRef } from "react"
 
-const Player = ({ position }) => {
+const Player = ({ position, onPositionChange }) => {
   const ref = useRef()
   const speed = 0.2
-
   const keys = useRef({ w: false, a: false, s: false, d: false })
 
   useEffect(() => {
@@ -33,11 +32,15 @@ const Player = ({ position }) => {
 
   useFrame(() => {
     const [x, y, z] = ref.current.position
-		
+
     if (keys.current.w) ref.current.position.z = z - speed
     if (keys.current.s) ref.current.position.z = z + speed
     if (keys.current.a) ref.current.position.x = x - speed
     if (keys.current.d) ref.current.position.x = x + speed
+
+    if (onPositionChange) {
+      onPositionChange(ref.current.position)
+    }
   })
 
   return (

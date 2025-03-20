@@ -3,11 +3,11 @@ import Scene from "../../components/Scene/Scene"
 import styles from "./HomeScene.module.css"
 
 const HomeScene = () => {
-  const [isPointLight, setIsPointLight] = useState(false)
+  const [enablePointLight, setEnablePointLight] = useState(false)
   const [enableFreeView, setEnableFreeView] = useState(false)
 
   const switchPointLight = e => {
-    setIsPointLight(e.target.checked)
+    setEnablePointLight(e.target.checked)
   }
 
   const changeView = e => {
@@ -20,7 +20,7 @@ const HomeScene = () => {
         <label htmlFor="point-view-control">
           enable pointlight
           <input
-            checked={isPointLight}
+            checked={enablePointLight}
             onChange={e => switchPointLight(e)}
             type="checkbox"
             id="point-view-control"
@@ -37,10 +37,7 @@ const HomeScene = () => {
         </label>
       </div>
 
-      <Scene
-        isPointLight={isPointLight}
-        enableFreeView={enableFreeView}
-      ></Scene>
+      <Scene isPointLight={enablePointLight} enableFreeView={enableFreeView} />
     </>
   )
 }
