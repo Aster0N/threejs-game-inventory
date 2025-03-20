@@ -32,7 +32,7 @@ export function setupEventListeners(
   document.addEventListener("mousemove", e => {
     if (isRotating) {
       const sensitivity = 0.003
-      rotation.theta -= e.movementX * sensitivity
+      rotation.theta += e.movementX * sensitivity
       rotation.phi = Math.max(
         0.1,
         Math.min(Math.PI - 0.1, rotation.phi - e.movementY * sensitivity)

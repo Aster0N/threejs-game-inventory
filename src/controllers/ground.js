@@ -1,6 +1,7 @@
 import { Mesh, MeshStandardMaterial, PlaneGeometry } from "three"
+import { groundSize } from "../consts"
 
-const groundGeometry = new PlaneGeometry(50, 50)
+const groundGeometry = new PlaneGeometry(groundSize.width, groundSize.height)
 const groundMaterial = new MeshStandardMaterial({ color: 0xc0c0c0 })
 
 export const ground = new Mesh(groundGeometry, groundMaterial)

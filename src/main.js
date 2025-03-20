@@ -4,6 +4,7 @@ import {
   Scene,
   WebGLRenderer,
 } from "three"
+import { playerSettings } from "./consts"
 import { updateCamera } from "./controllers/camera"
 import { ground } from "./controllers/ground"
 import { ambientLight, pointLight } from "./controllers/light"
@@ -17,7 +18,7 @@ let rotation = { theta: Math.PI / 2, phi: Math.PI / 4 }
 let cameraDistance = 10
 let isRotating = false
 const keys = { w: false, a: false, s: false, d: false }
-const moveSpeed = 0.5
+
 const zoom = {
   zoomSpeed: 0.003,
   max: 15,
@@ -51,13 +52,29 @@ document.addEventListener("wheel", e => {
   )
 })
 
+const movePlayer = () => {
+  let newX = player.position.x
+  let newZ = player.position.z
+
+  if (keys.w) newZ -= playerSettings.speed
+  if (keys.s) newZ += playerSettings.speed
+  if (keys.a) newX -= playerSettings.speed
+  if (keys.d) newX += playerSettings.speed
+
+  player.position.x = Math.max(
+    -playerSettings.maxX,
+    Math.min(playerSettings.maxX, newX)
+  )
+  player.position.z = Math.max(
+    -playerSettings.maxZ,
+    Math.min(playerSettings.maxZ, newZ)
+  )
+}
+
 const animate = () => {
   requestAnimationFrame(animate)
 
-  if (keys.w) player.position.z -= moveSpeed
-  if (keys.s) player.position.z += moveSpeed
-  if (keys.a) player.position.x -= moveSpeed
-  if (keys.d) player.position.x += moveSpeed
+  movePlayer()
 
   const { camX, camY, camZ } = updateCamera(
     rotation,
