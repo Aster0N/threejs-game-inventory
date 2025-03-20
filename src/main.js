@@ -6,6 +6,7 @@ import {
 } from "three"
 import { playerSettings } from "./consts"
 import { updateCamera } from "./controllers/camera"
+import { cubes } from "./controllers/cubes"
 import { ground } from "./controllers/ground"
 import { ambientLight, pointLight } from "./controllers/light"
 import { player } from "./controllers/player"
@@ -42,6 +43,7 @@ scene.add(ground)
 scene.add(player)
 scene.add(ambientLight)
 scene.add(pointLight)
+cubes.forEach(cube => scene.add(cube))
 
 setupEventListeners(keys, rotation, isRotating, camera, renderer)
 
