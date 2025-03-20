@@ -3,7 +3,7 @@ import Player from "@/components/Player/Player"
 import { OrbitControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 
-const Scene = ({ isPointLight }) => {
+const Scene = ({ isPointLight, enableFreeView }) => {
   return (
     <Canvas shadows style={{ height: "100vh" }}>
       <ambientLight intensity={2} />
@@ -19,7 +19,7 @@ const Scene = ({ isPointLight }) => {
       )}
       <Player position={[0, 0, 0]} />
       <Ground />
-      <OrbitControls />
+      {enableFreeView && <OrbitControls enablePan={true} />}
     </Canvas>
   )
 }
