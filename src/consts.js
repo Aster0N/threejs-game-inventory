@@ -7,6 +7,7 @@ export const zoom = {
 export const groundSize = {
   width: 50,
   height: 50,
+	depth: 10
 }
 
 export const playerRadius = 2
