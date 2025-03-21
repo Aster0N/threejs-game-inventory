@@ -14,6 +14,7 @@ import { setupEventListeners } from "./controllers/setupEventListeners"
 import { highlightInteractiveElements } from "./helpers/highlightInteractiveElements"
 import { movePlayer } from "./helpers/movePlayer"
 import "./styles/index.css"
+import "./styles/main.css"
 
 const canvas = document.getElementById("canvas")
 
@@ -48,6 +49,17 @@ document.addEventListener("wheel", e => {
     zoom.max,
     Math.min(zoom.min, cameraDistance + e.deltaY * zoom.zoomSpeed)
   )
+})
+
+// controls
+const pointLightControl = document.querySelector("#point-light-control")
+
+pointLightControl.addEventListener("change", e => {
+  if (!e.target.checked) {
+    scene.remove(pointLight)
+    return
+  }
+  scene.add(pointLight)
 })
 
 const animate = () => {
