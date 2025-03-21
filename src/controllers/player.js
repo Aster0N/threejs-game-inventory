@@ -1,12 +1,12 @@
 import { Mesh, MeshPhongMaterial, SphereGeometry } from "three"
 import { playerRadius } from "../consts"
 
-const playerGeometry = new SphereGeometry(playerRadius, 32, 32)
+const playerGeometry = new SphereGeometry(playerRadius, 64, 64)
 const playerMaterial = new MeshPhongMaterial({
   color: 0xe74c3c,
-  flatShading: false,
+  flatShading: true,
   reflectivity: 1,
-  shininess: 10,
+  shininess: 25,
   specular: 0xffffff,
 })
 

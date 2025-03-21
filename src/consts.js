@@ -1,15 +1,15 @@
 export const zoom = {
   zoomSpeed: 0.003,
-  max: 15,
-  min: 3,
+  min: 25,
+  max: 3,
 }
 
 export const groundSize = {
-  width: 25,
-  height: 25,
+  width: 50,
+  height: 50,
 }
 
-export const playerRadius = 1
+export const playerRadius = 2
 
 export const playerSettings = {
   maxX: groundSize.width / 2 - playerRadius,
@@ -18,8 +18,8 @@ export const playerSettings = {
 }
 
 export const cubesSettings = {
-  maxSize: 1,
-  minSize: 0.4,
+  maxSize: 2,
+  minSize: 1,
   totalCubesCount: 15,
 }
 

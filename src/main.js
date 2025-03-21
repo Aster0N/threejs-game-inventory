@@ -45,8 +45,8 @@ setupEventListeners(keys, rotation, isRotating, camera, renderer)
 
 document.addEventListener("wheel", e => {
   cameraDistance = Math.max(
-    zoom.min,
-    Math.min(zoom.max, cameraDistance + e.deltaY * zoom.zoomSpeed)
+    zoom.max,
+    Math.min(zoom.min, cameraDistance + e.deltaY * zoom.zoomSpeed)
   )
 })
 
