@@ -5,5 +5,5 @@ export function updateCamera(rotation, playerPosition, cameraDistance) {
   const camY = y + cameraDistance * Math.cos(phi)
   const camZ = z + cameraDistance * Math.sin(phi) * Math.sin(theta)
 
-	return {camX, camY, camZ}
+  return { camX, camY, camZ }
 }

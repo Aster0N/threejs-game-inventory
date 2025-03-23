@@ -2,7 +2,7 @@ import { playerSettings } from "../consts"
 
 export const movePlayer = (player, keys) => {
   const speed = playerSettings.speed
-  const rotationSpeed = 0.08 //
+  const rotationSpeed = 0.03
 
   if (keys.w) {
     player.position.z -= speed * Math.cos(player.rotation.y)
@@ -13,10 +13,10 @@ export const movePlayer = (player, keys) => {
     player.position.x += speed * Math.sin(player.rotation.y)
   }
 
-  if (keys.a) {
+  if ((keys.w && keys.a) || (keys.s && keys.a)) {
     player.rotation.y += rotationSpeed
   }
-  if (keys.d) {
+  if ((keys.w && keys.d) || (keys.s && keys.d)) {
     player.rotation.y -= rotationSpeed
   }
 
