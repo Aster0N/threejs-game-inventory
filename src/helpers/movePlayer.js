@@ -13,11 +13,17 @@ export const movePlayer = (player, keys) => {
     player.position.x += speed * Math.sin(player.rotation.y)
   }
 
-  if ((keys.w && keys.a) || (keys.s && keys.a)) {
+  if (keys.w && keys.a) {
     player.rotation.y += rotationSpeed
   }
-  if ((keys.w && keys.d) || (keys.s && keys.d)) {
+  if (keys.w && keys.d) {
     player.rotation.y -= rotationSpeed
+  }
+  if (keys.s && keys.a) {
+    player.rotation.y -= rotationSpeed
+  }
+  if (keys.s && keys.d) {
+    player.rotation.y += rotationSpeed
   }
 
   player.position.x = Math.max(

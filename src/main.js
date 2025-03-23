@@ -8,9 +8,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { zoom } from "./consts"
 import { updateCamera } from "./controllers/camera"
 import { cubes } from "./controllers/cubes"
-import { ground } from "./controllers/ground"
 import { ambientLight, pointLight } from "./controllers/light"
-// import { player } from "./controllers/player"
 import { setupEventListeners } from "./controllers/setupEventListeners"
 import { animateCar } from "./helpers/animateCar"
 import { collectCoins } from "./helpers/collectCoins"
@@ -40,8 +38,6 @@ renderer.shadowMap.enabled = true
 renderer.shadowMap.type = PCFSoftShadowMap
 renderer.setClearColor(0xf3ebb8, 1)
 
-scene.add(ground)
-// scene.add(player)
 scene.add(ambientLight)
 scene.add(pointLight)
 cubes.forEach(cube => scene.add(cube))
@@ -49,10 +45,10 @@ cubes.forEach(cube => scene.add(cube))
 let player = null
 
 loader.load(
-  "/assets/car.glb", // Путь к модели
+  "/assets/car.glb",
   gltf => {
     player = gltf.scene
-    player.position.set(0, 5, 0)
+    player.position.set(0, 2, 0)
     player.scale.set(1, 1, 1)
     player.castShadow = true
     player.receiveShadow = true
@@ -60,6 +56,21 @@ loader.load(
   },
   undefined,
   error => console.error("Car loading error:", error)
+)
+
+let ground = null
+
+loader.load(
+  "/assets/ground.glb",
+  gltf => {
+    ground = gltf.scene
+    ground.position.set(0, 0, 0)
+    ground.scale.set(1, 1, 1)
+    ground.receiveShadow = true
+    scene.add(ground)
+  },
+  undefined,
+  error => console.error("Ground loading error:", error)
 )
 
 setupEventListeners(keys, rotation, isRotating, camera, renderer)
@@ -85,7 +96,7 @@ pointLightControl.addEventListener("change", e => {
 const animate = () => {
   requestAnimationFrame(animate)
 
-  if (!player) {
+  if (!player || !ground) {
     return
   }
 
