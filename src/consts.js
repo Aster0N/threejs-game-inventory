@@ -5,8 +5,8 @@ export const zoom = {
 }
 
 export const groundSize = {
-  width: 50,
-  height: 50,
+  width: 65,
+  height: 45,
   depth: 10,
 }
 
@@ -19,10 +19,8 @@ export const playerSettings = {
   speed: 0.3,
 }
 
-export const cubesSettings = {
-  maxSize: 2,
-  minSize: 1,
-  totalCubesCount: 15,
+export const coinsSettings = {
+  totalCoinsCount: 30,
 }
 
 export const interactionSettings = {

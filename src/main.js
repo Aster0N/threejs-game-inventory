@@ -5,9 +5,8 @@ import {
   WebGLRenderer,
 } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
-import { zoom } from "./consts"
+import { coinsSettings, groundSize, zoom } from "./consts"
 import { updateCamera } from "./controllers/camera"
-import { cubes } from "./controllers/cubes"
 import { ambientLight, pointLight } from "./controllers/light"
 import { setupEventListeners } from "./controllers/setupEventListeners"
 import { animateCar } from "./helpers/animateCar"
@@ -40,10 +39,9 @@ renderer.setClearColor(0xf3ebb8, 1)
 
 scene.add(ambientLight)
 scene.add(pointLight)
-cubes.forEach(cube => scene.add(cube))
 
+// PLAYER
 let player = null
-
 loader.load(
   "/assets/car.glb",
   gltf => {
@@ -58,8 +56,8 @@ loader.load(
   error => console.error("Car loading error:", error)
 )
 
+// GROUND
 let ground = null
-
 loader.load(
   "/assets/ground.glb",
   gltf => {
@@ -71,6 +69,30 @@ loader.load(
   },
   undefined,
   error => console.error("Ground loading error:", error)
+)
+
+//COINS
+let coinModel = null
+let coins = []
+loader.load(
+  "/assets/coin.glb",
+  gltf => {
+    coinModel = gltf.scene
+    coinModel.scale.set(1, 1, 1)
+    coinModel.castShadow = true
+    coinModel.receiveShadow = true
+
+    for (let i = 0; i < coinsSettings.totalCoinsCount; i++) {
+      const x = (Math.random() - 0.5) * groundSize.width
+      const z = (Math.random() - 0.5) * groundSize.height
+      const coin = coinModel.clone()
+      coin.position.set(x, 0, z)
+      scene.add(coin)
+      coins.push(coin)
+    }
+  },
+  undefined,
+  error => console.error("Coin loading error:", error)
 )
 
 setupEventListeners(keys, rotation, isRotating, camera, renderer)
@@ -102,7 +124,7 @@ const animate = () => {
 
   movePlayer(player, keys)
   animateCar(player, keys)
-  collectCoins(player, cubes, scene)
+  collectCoins(player, coins, scene)
 
   const { camX, camY, camZ } = updateCamera(
     rotation,
