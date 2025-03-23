@@ -1,8 +1,8 @@
 import {
-  PCFSoftShadowMap,
-  PerspectiveCamera,
-  Scene,
-  WebGLRenderer,
+	PCFSoftShadowMap,
+	PerspectiveCamera,
+	Scene,
+	WebGLRenderer,
 } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { coinsSettings, groundSize, zoom } from "./consts"
@@ -15,8 +15,8 @@ import { movePlayer } from "./helpers/movePlayer"
 import "./styles/index.css"
 import "./styles/main.css"
 
+import { animateCoins } from "./helpers/animateCoins";
 const canvas = document.getElementById("canvas")
-
 let rotation = { theta: Math.PI / 2, phi: Math.PI / 4 }
 let cameraDistance = 10
 let isRotating = false
@@ -118,13 +118,14 @@ pointLightControl.addEventListener("change", e => {
 const animate = () => {
   requestAnimationFrame(animate)
 
-  if (!player || !ground) {
+  if (!player || !ground || !coins.length) {
     return
   }
 
   movePlayer(player, keys)
   animateCar(player, keys)
   collectCoins(player, coins, scene)
+	animateCoins(coins)
 
   const { camX, camY, camZ } = updateCamera(
     rotation,
