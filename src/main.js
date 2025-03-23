@@ -35,6 +35,7 @@ const renderer = new WebGLRenderer({ canvas })
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = PCFSoftShadowMap
+renderer.setClearColor(0xf3ebb8, 1)
 
 scene.add(ground)
 scene.add(player)
