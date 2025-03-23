@@ -11,7 +11,7 @@ import { ground } from "./controllers/ground"
 import { ambientLight, pointLight } from "./controllers/light"
 import { player } from "./controllers/player"
 import { setupEventListeners } from "./controllers/setupEventListeners"
-import { highlightInteractiveElements } from "./helpers/highlightInteractiveElements"
+import { collectCoins } from "./helpers/collectCoins"
 import { movePlayer } from "./helpers/movePlayer"
 import "./styles/index.css"
 import "./styles/main.css"
@@ -66,7 +66,7 @@ const animate = () => {
   requestAnimationFrame(animate)
 
   movePlayer(player, keys)
-  highlightInteractiveElements(player, cubes)
+  collectCoins(player, cubes, scene)
 
   const { camX, camY, camZ } = updateCamera(
     rotation,

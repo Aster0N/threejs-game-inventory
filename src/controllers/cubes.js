@@ -2,9 +2,8 @@ import { BoxGeometry, Mesh, MeshStandardMaterial } from "three"
 import { cubesSettings, groundSize } from "../consts"
 
 const createCube = (size, x, z) => {
-  const geometry = new BoxGeometry(size, size, size)
-  // TODO paint cube according to its size (weight)
-  const material = new MeshStandardMaterial({ color: 0x3498db })
+  const geometry = new BoxGeometry(size, size / 4, size)
+  const material = new MeshStandardMaterial({ color: 0xffff00 })
   const cube = new Mesh(geometry, material)
   cube.position.set(x, size / 2, z)
   cube.castShadow = true
