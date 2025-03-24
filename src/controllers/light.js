@@ -1,8 +1,16 @@
-import { AmbientLight, PointLight } from "three"
+import { AmbientLight, DirectionalLight } from "three"
 
-export const ambientLight = new AmbientLight(0xffffff, 1.2)
-export const pointLight = new PointLight(0xffffff, 30, 100)
-pointLight.position.set(0, 10, 0)
-pointLight.castShadow = true
-pointLight.shadow.mapSize.width = 1024
-pointLight.shadow.mapSize.height = 1024
+export const ambientLight = new AmbientLight(0x87ceeb, 0.6)
+export const sunLight = new DirectionalLight(0xffffff, 1.0)
+sunLight.position.set(20, 30, 10)
+sunLight.castShadow = true
+
+sunLight.shadow.mapSize.width = 2048
+sunLight.shadow.mapSize.height = 2048
+sunLight.shadow.camera.near = 0.5
+sunLight.shadow.camera.far = 100
+sunLight.shadow.camera.left = -50
+sunLight.shadow.camera.right = 50
+sunLight.shadow.camera.top = 50
+sunLight.shadow.camera.bottom = -50
+sunLight.shadow.bias = -0.0001 // remove shadow artifacts

@@ -1,13 +1,14 @@
 import {
-	PCFSoftShadowMap,
-	PerspectiveCamera,
-	Scene,
-	WebGLRenderer,
+  FogExp2,
+  PCFSoftShadowMap,
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
 } from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
 import { coinsSettings, groundSize, zoom } from "./consts"
 import { updateCamera } from "./controllers/camera"
-import { ambientLight, pointLight } from "./controllers/light"
+import { ambientLight, sunLight } from "./controllers/light"
 import { setupEventListeners } from "./controllers/setupEventListeners"
 import { animateCar } from "./helpers/animateCar"
 import { collectCoins } from "./helpers/collectCoins"
@@ -15,7 +16,7 @@ import { movePlayer } from "./helpers/movePlayer"
 import "./styles/index.css"
 import "./styles/main.css"
 
-import { animateCoins } from "./helpers/animateCoins";
+import { animateCoins } from "./helpers/animateCoins"
 const canvas = document.getElementById("canvas")
 let rotation = { theta: Math.PI / 2, phi: Math.PI / 4 }
 let cameraDistance = 10
@@ -38,7 +39,7 @@ renderer.shadowMap.type = PCFSoftShadowMap
 renderer.setClearColor(0xf3ebb8, 1)
 
 scene.add(ambientLight)
-scene.add(pointLight)
+scene.add(sunLight)
 
 // PLAYER
 let player = null
@@ -105,14 +106,23 @@ document.addEventListener("wheel", e => {
 })
 
 // controls
-const pointLightControl = document.querySelector("#point-light-control")
-
-pointLightControl.addEventListener("change", e => {
+const sunlightControl = document.querySelector("#point-light-control")
+sunlightControl.addEventListener("change", e => {
   if (!e.target.checked) {
-    scene.remove(pointLight)
+    scene.remove(sunLight)
     return
   }
-  scene.add(pointLight)
+  scene.add(sunLight)
+})
+
+scene.fog = null
+const fogControl = document.querySelector("#fog-control")
+fogControl.addEventListener("change", e => {
+  if (!e.target.checked) {
+    scene.fog = null
+    return
+  }
+  scene.fog = new FogExp2(0xcccccc, 0.03)
 })
 
 const animate = () => {
@@ -125,7 +135,7 @@ const animate = () => {
   movePlayer(player, keys)
   animateCar(player, keys)
   collectCoins(player, coins, scene)
-	animateCoins(coins)
+  animateCoins(coins)
 
   const { camX, camY, camZ } = updateCamera(
     rotation,
