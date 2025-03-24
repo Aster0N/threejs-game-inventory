@@ -148,3 +148,33 @@ const animate = () => {
 }
 
 animate()
+
+const settingsBtn = document.querySelector("#settings-btn")
+const guideBtn = document.querySelector("#guide-btn")
+const settingsPopup = document.querySelector("#settings-popup")
+const guidePopup = document.querySelector("#guide-popup")
+const closeButtons = document.querySelectorAll(".close-btn")
+
+settingsBtn.addEventListener("click", () => {
+  settingsPopup.style.display = "flex"
+})
+
+guideBtn.addEventListener("click", () => {
+  guidePopup.style.display = "flex"
+})
+
+closeButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    settingsPopup.style.display = "none"
+    guidePopup.style.display = "none"
+  })
+})
+
+window.addEventListener("click", e => {
+  if (e.target === settingsPopup) {
+    settingsPopup.style.display = "none"
+  }
+  if (e.target === guidePopup) {
+    guidePopup.style.display = "none"
+  }
+})
