@@ -11,7 +11,7 @@ export const groundSize = {
 }
 
 export const playerWidth = 3
-export const playerDepth = 5
+export const playerDepth = 9
 
 export const playerSettings = {
   maxX: groundSize.width / 2 - playerWidth,

@@ -16,7 +16,6 @@ import { movePlayer } from "./helpers/movePlayer"
 import "./styles/index.css"
 import "./styles/main.css"
 
-import { animateCoins } from "./helpers/animateCoins"
 const canvas = document.getElementById("canvas")
 let rotation = { theta: Math.PI / 2, phi: Math.PI / 4 }
 let cameraDistance = 10
@@ -87,6 +86,7 @@ loader.load(
       const x = (Math.random() - 0.5) * groundSize.width
       const z = (Math.random() - 0.5) * groundSize.height
       const coin = coinModel.clone()
+      coin.rotation.y = Math.random() * 10
       coin.position.set(x, 0, z)
       scene.add(coin)
       coins.push(coin)
@@ -135,7 +135,6 @@ const animate = () => {
   movePlayer(player, keys)
   animateCar(player, keys)
   collectCoins(player, coins, scene)
-  animateCoins(coins)
 
   const { camX, camY, camZ } = updateCamera(
     rotation,
